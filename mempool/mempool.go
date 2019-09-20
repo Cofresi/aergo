@@ -18,7 +18,7 @@ import (
 
 	"github.com/aergoio/aergo-actor/actor"
 	"github.com/aergoio/aergo-actor/router"
-	"github.com/aergoio/aergo-lib/log"
+	"github.com/Cofresi/aergo-lib/log"
 	"github.com/aergoio/aergo/account/key"
 	"github.com/aergoio/aergo/chain"
 	cfg "github.com/aergoio/aergo/config"

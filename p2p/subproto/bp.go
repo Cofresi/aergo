@@ -6,7 +6,7 @@
 package subproto
 
 import (
-	"github.com/aergoio/aergo-lib/log"
+	"github.com/Cofresi/aergo-lib/log"
 	"github.com/aergoio/aergo/internal/enc"
 	"github.com/aergoio/aergo/p2p/p2pcommon"
 	"github.com/aergoio/aergo/p2p/p2putil"
@@ -38,7 +38,7 @@ func (bh *blockProducedNoticeHandler) Handle(msg p2pcommon.Message, msgBody p2pc
 	}
 	// remove to verbose log
 	p2putil.DebugLogReceive(bh.logger, bh.protocol, msg.ID().String(), remotePeer,data)
-	
+
 	// lru cache can accept hashable key
 	block := data.Block
 	if _, err := types.ParseToBlockID(data.GetBlock().GetHash()); err != nil {

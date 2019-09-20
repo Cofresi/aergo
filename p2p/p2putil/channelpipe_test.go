@@ -6,7 +6,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/aergoio/aergo-lib/log"
+	"github.com/Cofresi/aergo-lib/log"
 	"github.com/stretchr/testify/assert"
 )
 

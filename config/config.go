@@ -9,7 +9,7 @@ import (
 	"github.com/aergoio/aergo/types"
 	"runtime"
 
-	"github.com/aergoio/aergo-lib/config"
+	"github.com/Cofresi/aergo-lib/config"
 	//	"github.com/aergoio/aergo/types"
 )
 
@@ -100,6 +100,7 @@ func (ctx *ServerContext) GetDefaultPolarisConfig() *PolarisConfig {
 	return &PolarisConfig{
 		GenesisFile:  "",
 		AllowPrivate: false,
+		EnableBlacklist: true,
 	}
 }
 

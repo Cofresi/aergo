@@ -6,7 +6,7 @@
 package raftv2
 
 import (
-	"github.com/aergoio/aergo/types"
+	"github.com/Cofresi/aergo/types"
 	rtypes "github.com/aergoio/etcd/pkg/types"
 	"github.com/aergoio/etcd/raft/raftpb"
 	"github.com/aergoio/etcd/rafthttp"

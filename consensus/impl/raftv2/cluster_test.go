@@ -2,9 +2,9 @@ package raftv2
 
 import (
 	"encoding/json"
-	"github.com/aergoio/aergo/config"
-	"github.com/aergoio/aergo/consensus"
-	"github.com/aergoio/aergo/types"
+	"github.com/Cofresi/aergo/config"
+	"github.com/Cofresi/aergo/consensus"
+	"github.com/Cofresi/aergo/types"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )

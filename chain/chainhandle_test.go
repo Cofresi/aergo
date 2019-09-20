@@ -10,7 +10,7 @@ import (
 	"os"
 	"testing"
 
-	"github.com/aergoio/aergo-lib/db"
+	"github.com/Cofresi/aergo-lib/db"
 	"github.com/aergoio/aergo/account/key"
 	"github.com/aergoio/aergo/contract"
 	"github.com/aergoio/aergo/contract/system"

@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/aergoio/aergo/state"
-	"github.com/aergoio/aergo/types"
+	"github.com/Cofresi/aergo/state"
+	"github.com/Cofresi/aergo/types"
 	"github.com/stretchr/testify/assert"
 )
 

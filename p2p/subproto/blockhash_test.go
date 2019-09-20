@@ -8,7 +8,7 @@ package subproto
 import (
 	"bytes"
 	"crypto/sha256"
-	"github.com/aergoio/aergo-lib/log"
+	"github.com/Cofresi/aergo-lib/log"
 	"github.com/aergoio/aergo/internal/enc"
 	"github.com/aergoio/aergo/p2p/p2pcommon"
 	"github.com/aergoio/etcd/raft/raftpb"

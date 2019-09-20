@@ -2,9 +2,9 @@ package raftv2
 
 import (
 	"errors"
-	"github.com/aergoio/aergo/message"
-	"github.com/aergoio/aergo/pkg/component"
-	"github.com/aergoio/aergo/types"
+	"github.com/Cofresi/aergo/message"
+	"github.com/Cofresi/aergo/pkg/component"
+	"github.com/Cofresi/aergo/types"
 	"time"
 )
 

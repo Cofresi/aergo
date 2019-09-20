@@ -14,7 +14,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/aergoio/aergo-lib/db"
+	"github.com/Cofresi/aergo-lib/db"
 	luac_util "github.com/aergoio/aergo/cmd/aergoluac/util"
 	"github.com/aergoio/aergo/contract/system"
 	"github.com/aergoio/aergo/state"
@@ -110,6 +110,19 @@ func (bc *DummyChain) GetABI(contract string) (*types.ABI, error) {
 		return nil, err
 	}
 	return GetABI(cState)
+}
+
+func (bc *DummyChain) GetEvents(tx *luaTxCall) []*types.Event {
+	h := sha256.New()
+	h.Write([]byte(strconv.FormatUint(tx.id, 10)))
+	b := h.Sum(nil)
+
+	receipt := bc.getReceipt(b)
+	if receipt != nil {
+		return receipt.Events
+	}
+
+	return nil
 }
 
 func (bc *DummyChain) getReceipt(txHash []byte) *types.Receipt {
@@ -578,18 +591,28 @@ func (bc *DummyChain) Query(contract, queryInfo, expectedErr string, expectedRvs
 	return err
 }
 
-func (bc *DummyChain) QueryOnly(contract, queryInfo string) (string, error) {
+func (bc *DummyChain) QueryOnly(contract, queryInfo string, expectedErr string) (bool, string, error) {
 	cState, err := bc.sdb.GetStateDB().OpenContractStateAccount(types.ToAccountID(strHash(contract)))
 	if err != nil {
-		return "", err
+		return false, "", err
 	}
 	rv, err := Query(strHash(contract), bc.newBState(), nil, cState, []byte(queryInfo))
 
-	if err != nil {
-		return "", err
+	if expectedErr != "" {
+		if err == nil {
+			return false, "", fmt.Errorf("no error, expected: %s", expectedErr)
+		}
+		if !strings.Contains(err.Error(), expectedErr) {
+			return false, "", err
+		}
+		return true, "", nil
 	}
 
-	return string(rv), nil
+	if err != nil {
+		return false, "", err
+	}
+
+	return false, string(rv), nil
 }
 
 func StrToAddress(name string) string {

@@ -3,15 +3,16 @@ package raftv2
 import (
 	"errors"
 	"fmt"
-	"github.com/aergoio/aergo/message"
-	"github.com/aergoio/aergo/p2p/p2pkey"
-	"github.com/aergoio/aergo/types"
 	"strings"
 	"time"
 
-	"github.com/aergoio/aergo/chain"
-	"github.com/aergoio/aergo/config"
-	"github.com/aergoio/aergo/consensus"
+	"github.com/Cofresi/aergo/message"
+	"github.com/Cofresi/aergo/p2p/p2pkey"
+	"github.com/Cofresi/aergo/types"
+
+	"github.com/Cofresi/aergo/chain"
+	"github.com/Cofresi/aergo/config"
+	"github.com/Cofresi/aergo/consensus"
 )
 
 var (

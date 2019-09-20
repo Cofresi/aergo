@@ -1,7 +1,7 @@
 package subproto
 
 import (
-	"github.com/aergoio/aergo-lib/log"
+	"github.com/Cofresi/aergo-lib/log"
 	"github.com/aergoio/aergo/p2p/p2pcommon"
 )
 

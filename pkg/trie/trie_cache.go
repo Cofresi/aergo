@@ -8,7 +8,7 @@ package trie
 import (
 	"sync"
 
-	"github.com/aergoio/aergo-lib/db"
+	"github.com/Cofresi/aergo-lib/db"
 )
 
 // DbTx represents Set and Delete interface to store data
