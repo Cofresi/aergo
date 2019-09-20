@@ -6,12 +6,12 @@
 package p2p
 
 import (
-	"github.com/aergoio/aergo/config"
-	"github.com/aergoio/aergo/internal/network"
-	"github.com/aergoio/aergo/p2p/p2pcommon"
-	"github.com/aergoio/aergo/p2p/p2pkey"
-	"github.com/aergoio/aergo/p2p/p2putil"
-	"github.com/aergoio/aergo/types"
+	"github.com/Cofresi/aergo/config"
+	"github.com/Cofresi/aergo/internal/network"
+	"github.com/Cofresi/aergo/p2p/p2pcommon"
+	"github.com/Cofresi/aergo/p2p/p2pkey"
+	"github.com/Cofresi/aergo/p2p/p2putil"
+	"github.com/Cofresi/aergo/types"
 	"net"
 	"strconv"
 )

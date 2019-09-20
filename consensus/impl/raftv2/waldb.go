@@ -2,8 +2,8 @@ package raftv2
 
 import (
 	"errors"
-	"github.com/aergoio/aergo/consensus"
-	"github.com/aergoio/aergo/types"
+	"github.com/Cofresi/aergo/consensus"
+	"github.com/Cofresi/aergo/types"
 	"github.com/aergoio/etcd/raft"
 	"github.com/aergoio/etcd/raft/raftpb"
 )

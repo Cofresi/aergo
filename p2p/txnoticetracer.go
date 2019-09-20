@@ -7,9 +7,9 @@ package p2p
 
 import (
 	"github.com/Cofresi/aergo-lib/log"
-	"github.com/aergoio/aergo/message"
-	"github.com/aergoio/aergo/p2p/p2pcommon"
-	"github.com/aergoio/aergo/types"
+	"github.com/Cofresi/aergo/message"
+	"github.com/Cofresi/aergo/p2p/p2pcommon"
+	"github.com/Cofresi/aergo/types"
 	lru "github.com/hashicorp/golang-lru"
 	"time"
 )

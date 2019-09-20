@@ -2,11 +2,11 @@ package raftv2
 
 import (
 	"errors"
-	chainsvc "github.com/aergoio/aergo/chain"
-	"github.com/aergoio/aergo/consensus"
-	"github.com/aergoio/aergo/consensus/chain"
-	"github.com/aergoio/aergo/p2p/p2pcommon"
-	"github.com/aergoio/aergo/p2p/p2putil"
+	chainsvc "github.com/Cofresi/aergo/chain"
+	"github.com/Cofresi/aergo/consensus"
+	"github.com/Cofresi/aergo/consensus/chain"
+	"github.com/Cofresi/aergo/p2p/p2pcommon"
+	"github.com/Cofresi/aergo/p2p/p2putil"
 	"github.com/aergoio/aergo/pkg/component"
 	"github.com/aergoio/aergo/types"
 	"github.com/aergoio/etcd/raft/raftpb"

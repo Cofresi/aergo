@@ -7,10 +7,10 @@ package server
 
 import (
 	"github.com/Cofresi/aergo-lib/log"
-	"github.com/aergoio/aergo/config"
-	"github.com/aergoio/aergo/contract/enterprise"
-	"github.com/aergoio/aergo/p2p/p2putil"
-	"github.com/aergoio/aergo/types"
+	"github.com/Cofresi/aergo/config"
+	"github.com/Cofresi/aergo/contract/enterprise"
+	"github.com/Cofresi/aergo/p2p/p2putil"
+	"github.com/Cofresi/aergo/types"
 	"github.com/golang/mock/gomock"
 	"os"
 	"path/filepath"

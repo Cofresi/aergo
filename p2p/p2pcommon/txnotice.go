@@ -6,7 +6,7 @@
 package p2pcommon
 
 import (
-	"github.com/aergoio/aergo/types"
+	"github.com/Cofresi/aergo/types"
 )
 
 type TxNoticeTracer interface {

@@ -11,11 +11,11 @@ import (
 	"testing"
 	"time"
 
-	"github.com/aergoio/aergo/p2p/p2pcommon"
-	"github.com/aergoio/aergo/p2p/p2pmock"
+	"github.com/Cofresi/aergo/p2p/p2pcommon"
+	"github.com/Cofresi/aergo/p2p/p2pmock"
 	"github.com/golang/mock/gomock"
 
-	"github.com/aergoio/aergo/types"
+	"github.com/Cofresi/aergo/types"
 	"github.com/stretchr/testify/assert"
 )
 

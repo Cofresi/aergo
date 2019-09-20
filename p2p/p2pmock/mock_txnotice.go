@@ -5,7 +5,7 @@
 package p2pmock
 
 import (
-	types "github.com/aergoio/aergo/types"
+	types "github.com/Cofresi/aergo/types"
 	gomock "github.com/golang/mock/gomock"
 	reflect "reflect"
 )

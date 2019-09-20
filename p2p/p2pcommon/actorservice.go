@@ -7,7 +7,7 @@ package p2pcommon
 
 import (
 	"github.com/aergoio/aergo-actor/actor"
-	"github.com/aergoio/aergo/types"
+	"github.com/Cofresi/aergo/types"
 	"time"
 )
 
