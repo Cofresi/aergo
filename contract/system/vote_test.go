@@ -27,7 +27,7 @@ var sdb *state.StateDB
 
 func initTest(t *testing.T) (*state.ContractState, *state.V, *state.V) {
 	cdb = state.NewChainStateDB()
-	cdb.Init(string(db.BadgerImpl), "test", nil, false)
+	cdb.Init(string(db.LevelImpl), "test", nil, false)
 	genesis := types.GetTestGenesis()
 	sdb = cdb.OpenNewStateDB(cdb.GetRoot())
 	err := cdb.SetGenesis(genesis, nil)

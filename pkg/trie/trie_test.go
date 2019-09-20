@@ -22,8 +22,6 @@ import (
 
 	"github.com/Cofresi/aergo-lib/db"
 	"github.com/aergoio/aergo/internal/common"
-	//"github.com/dgraph-io/badger"
-	//"github.com/dgraph-io/badger/options"
 )
 
 func TestTrieEmpty(t *testing.T) {
@@ -297,7 +295,7 @@ func TestTrieCommit(t *testing.T) {
 	if _, err := os.Stat(dbPath); os.IsNotExist(err) {
 		_ = os.MkdirAll(dbPath, 0711)
 	}
-	st := db.NewDB(db.BadgerImpl, dbPath)
+	st := db.NewDB(db.LevelImpl, dbPath)
 
 	smt := NewTrie(nil, common.Hasher, st)
 	keys := getFreshData(10, 32)
@@ -321,7 +319,7 @@ func TestTrieStageUpdates(t *testing.T) {
 	if _, err := os.Stat(dbPath); os.IsNotExist(err) {
 		_ = os.MkdirAll(dbPath, 0711)
 	}
-	st := db.NewDB(db.BadgerImpl, dbPath)
+	st := db.NewDB(db.LevelImpl, dbPath)
 
 	smt := NewTrie(nil, common.Hasher, st)
 	keys := getFreshData(10, 32)
@@ -347,7 +345,7 @@ func TestTrieRevert(t *testing.T) {
 	if _, err := os.Stat(dbPath); os.IsNotExist(err) {
 		_ = os.MkdirAll(dbPath, 0711)
 	}
-	st := db.NewDB(db.BadgerImpl, dbPath)
+	st := db.NewDB(db.LevelImpl, dbPath)
 
 	smt := NewTrie(nil, common.Hasher, st)
 
@@ -436,7 +434,7 @@ func TestTrieRaisesError(t *testing.T) {
 	if _, err := os.Stat(dbPath); os.IsNotExist(err) {
 		_ = os.MkdirAll(dbPath, 0711)
 	}
-	st := db.NewDB(db.BadgerImpl, dbPath)
+	st := db.NewDB(db.LevelImpl, dbPath)
 
 	smt := NewTrie(nil, common.Hasher, st)
 	// Add data to empty trie
@@ -486,7 +484,7 @@ func TestTrieLoadCache(t *testing.T) {
 	if _, err := os.Stat(dbPath); os.IsNotExist(err) {
 		_ = os.MkdirAll(dbPath, 0711)
 	}
-	st := db.NewDB(db.BadgerImpl, dbPath)
+	st := db.NewDB(db.LevelImpl, dbPath)
 
 	smt := NewTrie(nil, common.Hasher, st)
 	// Test size of cache
@@ -587,7 +585,7 @@ func TestStash(t *testing.T) {
 	if _, err := os.Stat(dbPath); os.IsNotExist(err) {
 		_ = os.MkdirAll(dbPath, 0711)
 	}
-	st := db.NewDB(db.BadgerImpl, dbPath)
+	st := db.NewDB(db.LevelImpl, dbPath)
 	smt := NewTrie(nil, common.Hasher, st)
 	// Add data to empty trie
 	keys := getFreshData(20, 32)
@@ -678,7 +676,7 @@ func BenchmarkCacheHeightLimit233(b *testing.B) {
 	if _, err := os.Stat(dbPath); os.IsNotExist(err) {
 		_ = os.MkdirAll(dbPath, 0711)
 	}
-	st := db.NewDB(db.BadgerImpl, dbPath)
+	st := db.NewDB(db.LevelImpl, dbPath)
 	smt := NewTrie(nil, common.Hasher, st)
 	smt.CacheHeightLimit = 233
 	benchmark10MAccounts10Ktps(smt, b)
@@ -690,7 +688,7 @@ func BenchmarkCacheHeightLimit238(b *testing.B) {
 	if _, err := os.Stat(dbPath); os.IsNotExist(err) {
 		_ = os.MkdirAll(dbPath, 0711)
 	}
-	st := db.NewDB(db.BadgerImpl, dbPath)
+	st := db.NewDB(db.LevelImpl, dbPath)
 	smt := NewTrie(nil, common.Hasher, st)
 	smt.CacheHeightLimit = 238
 	benchmark10MAccounts10Ktps(smt, b)
@@ -702,7 +700,7 @@ func BenchmarkCacheHeightLimit245(b *testing.B) {
 	if _, err := os.Stat(dbPath); os.IsNotExist(err) {
 		_ = os.MkdirAll(dbPath, 0711)
 	}
-	st := db.NewDB(db.BadgerImpl, dbPath)
+	st := db.NewDB(db.LevelImpl, dbPath)
 	smt := NewTrie(nil, common.Hasher, st)
 	smt.CacheHeightLimit = 245
 	benchmark10MAccounts10Ktps(smt, b)
