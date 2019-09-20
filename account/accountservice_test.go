@@ -32,7 +32,7 @@ func initTest() {
 
 	sdb = state.NewChainStateDB()
 	testmode := true
-	sdb.Init(string(db.BadgerImpl), conf.DataDir, nil, testmode)
+	sdb.Init(string(db.LevelImpl), conf.DataDir, nil, testmode)
 
 	as = NewAccountService(conf, sdb)
 	as.testConfig = true

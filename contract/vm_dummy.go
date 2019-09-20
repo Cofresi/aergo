@@ -57,7 +57,7 @@ func LoadDummyChain() (*DummyChain, error) {
 		}
 	}()
 
-	err = bc.sdb.Init(string(db.BadgerImpl), dataPath, nil, false)
+	err = bc.sdb.Init(string(db.LevelImpl), dataPath, nil, false)
 	if err != nil {
 		return nil, err
 	}
@@ -67,7 +67,7 @@ func LoadDummyChain() (*DummyChain, error) {
 	bc.bestBlockId = genesis.Block().BlockID()
 	bc.blockIds = append(bc.blockIds, bc.bestBlockId)
 	bc.blocks = append(bc.blocks, genesis.Block())
-	bc.testReceiptDB = db.NewDB(db.BadgerImpl, path.Join(dataPath, "receiptDB"))
+	bc.testReceiptDB = db.NewDB(db.LevelImpl, path.Join(dataPath, "receiptDB"))
 	LoadTestDatabase(dataPath) // sql database
 	StartLStateFactory()
 
