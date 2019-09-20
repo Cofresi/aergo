@@ -15,8 +15,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/aergoio/aergo-lib/db"
-	"github.com/aergoio/aergo-lib/log"
+	"github.com/Cofresi/aergo-lib/db"
+	"github.com/Cofresi/aergo-lib/log"
 	"github.com/aergoio/aergo/types"
 	"github.com/aergoio/etcd/raft/raftpb"
 )

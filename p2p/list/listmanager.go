@@ -7,7 +7,7 @@ package list
 
 import (
 	"errors"
-	"github.com/aergoio/aergo-lib/log"
+	"github.com/Cofresi/aergo-lib/log"
 	"github.com/aergoio/aergo/config"
 	"github.com/aergoio/aergo/contract/enterprise"
 	"github.com/aergoio/aergo/p2p/p2pcommon"

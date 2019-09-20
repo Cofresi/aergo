@@ -1,6 +1,6 @@
 package cmd
 
-import "github.com/aergoio/aergo-lib/config"
+import "github.com/Cofresi/aergo-lib/config"
 
 const (
 	EnvironmentPrefix             = "AG"

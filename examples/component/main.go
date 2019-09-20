@@ -9,7 +9,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/aergoio/aergo-lib/log"
+	"github.com/Cofresi/aergo-lib/log"
 	"github.com/aergoio/aergo/examples/component/message"
 	"github.com/aergoio/aergo/examples/component/server"
 	"github.com/aergoio/aergo/examples/component/service"

@@ -6,7 +6,7 @@ import (
 	"github.com/aergoio/aergo/p2p/p2pkey"
 	"sort"
 
-	"github.com/aergoio/aergo-lib/db"
+	"github.com/Cofresi/aergo-lib/db"
 	"github.com/aergoio/aergo/consensus"
 	"github.com/aergoio/aergo/internal/common"
 	"github.com/aergoio/aergo/types"

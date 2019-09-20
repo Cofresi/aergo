@@ -16,7 +16,7 @@ import (
 	"sync/atomic"
 
 	"github.com/aergoio/aergo-actor/actor"
-	"github.com/aergoio/aergo-lib/log"
+	"github.com/Cofresi/aergo-lib/log"
 	cfg "github.com/aergoio/aergo/config"
 	"github.com/aergoio/aergo/consensus"
 	"github.com/aergoio/aergo/contract"

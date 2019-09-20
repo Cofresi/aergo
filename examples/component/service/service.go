@@ -9,7 +9,7 @@ import (
 	"fmt"
 
 	"github.com/aergoio/aergo-actor/actor"
-	"github.com/aergoio/aergo-lib/log"
+	"github.com/Cofresi/aergo-lib/log"
 	"github.com/aergoio/aergo/examples/component/message"
 	"github.com/aergoio/aergo/pkg/component"
 )

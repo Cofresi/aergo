@@ -4,7 +4,7 @@ import (
 	"os"
 	"testing"
 
-	"github.com/aergoio/aergo-lib/db"
+	"github.com/Cofresi/aergo-lib/db"
 	"github.com/aergoio/aergo/state"
 	"github.com/aergoio/aergo/types"
 	"github.com/stretchr/testify/assert"

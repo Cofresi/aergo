@@ -10,7 +10,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/aergoio/aergo-lib/log"
+	"github.com/Cofresi/aergo-lib/log"
 	"github.com/aergoio/aergo/config"
 	cfg "github.com/aergoio/aergo/config"
 	"github.com/aergoio/aergo/message"

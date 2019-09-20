@@ -7,7 +7,7 @@ package raftsupport
 
 import (
 	"bytes"
-	"github.com/aergoio/aergo-lib/log"
+	"github.com/Cofresi/aergo-lib/log"
 	"github.com/aergoio/aergo/p2p/p2putil"
 	"sync"
 	"sync/atomic"

@@ -6,7 +6,7 @@
 package cmd
 
 import (
-	"github.com/aergoio/aergo-lib/config"
+	"github.com/Cofresi/aergo-lib/config"
 	"github.com/aergoio/aergo/polaris/common"
 )
 

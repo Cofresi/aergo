@@ -16,7 +16,7 @@ import (
 	"github.com/aergoio/aergo/internal/enc"
 	"github.com/libp2p/go-libp2p-core/crypto"
 
-	"github.com/aergoio/aergo-lib/log"
+	"github.com/Cofresi/aergo-lib/log"
 	bc "github.com/aergoio/aergo/chain"
 	"github.com/aergoio/aergo/config"
 	"github.com/aergoio/aergo/consensus"

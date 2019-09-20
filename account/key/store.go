@@ -9,7 +9,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/aergoio/aergo-lib/db"
+	"github.com/Cofresi/aergo-lib/db"
 	"github.com/aergoio/aergo/types"
 	"github.com/btcsuite/btcd/btcec"
 	sha256 "github.com/minio/sha256-simd"

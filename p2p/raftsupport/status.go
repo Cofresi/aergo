@@ -6,7 +6,7 @@
 package raftsupport
 
 import (
-	"github.com/aergoio/aergo-lib/log"
+	"github.com/Cofresi/aergo-lib/log"
 	"github.com/aergoio/aergo/p2p/p2putil"
 	"github.com/aergoio/aergo/types"
 	rtypes "github.com/aergoio/etcd/pkg/types"

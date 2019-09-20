@@ -5,7 +5,7 @@ import (
 	"math/big"
 	"sync"
 
-	"github.com/aergoio/aergo-lib/db"
+	"github.com/Cofresi/aergo-lib/db"
 	"github.com/aergoio/aergo/internal/common"
 	"github.com/aergoio/aergo/internal/enc"
 	"github.com/aergoio/aergo/types"

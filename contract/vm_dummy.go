@@ -14,7 +14,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/aergoio/aergo-lib/db"
+	"github.com/Cofresi/aergo-lib/db"
 	luac_util "github.com/aergoio/aergo/cmd/aergoluac/util"
 	"github.com/aergoio/aergo/contract/system"
 	"github.com/aergoio/aergo/state"

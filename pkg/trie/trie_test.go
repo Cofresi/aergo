@@ -20,7 +20,7 @@ import (
 	"sort"
 	"testing"
 
-	"github.com/aergoio/aergo-lib/db"
+	"github.com/Cofresi/aergo-lib/db"
 	"github.com/aergoio/aergo/internal/common"
 	//"github.com/dgraph-io/badger"
 	//"github.com/dgraph-io/badger/options"

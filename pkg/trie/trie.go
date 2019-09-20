@@ -10,7 +10,7 @@ import (
 	"fmt"
 	"sync"
 
-	"github.com/aergoio/aergo-lib/db"
+	"github.com/Cofresi/aergo-lib/db"
 )
 
 // Trie is a modified sparse Merkle tree.

@@ -8,7 +8,7 @@ package types
 import (
 	"bytes"
 	"fmt"
-	"github.com/aergoio/aergo-lib/log"
+	"github.com/Cofresi/aergo-lib/log"
 	"github.com/gofrs/uuid"
 	"strings"
 	"testing"

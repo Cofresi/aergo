@@ -11,7 +11,7 @@ import (
 	"time"
 
 	"github.com/aergoio/aergo-actor/actor"
-	"github.com/aergoio/aergo-lib/log"
+	"github.com/Cofresi/aergo-lib/log"
 	"github.com/opentracing/opentracing-go"
 	"github.com/gofrs/uuid"
 )
