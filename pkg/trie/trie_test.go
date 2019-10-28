@@ -795,37 +795,41 @@ func TestStash(t *testing.T) {
 }
 
 func benchmark10MAccounts10Ktps(smt *Trie, b *testing.B) {
-	//b.ReportAllocs()
-	keys := getFreshData(100, 32)
-	values := getFreshData(100, 32)
-	smt.Update(keys, values)
-	fmt.Println("\nLoading b.N x 1000 accounts")
-	for i := 0; i < b.N; i++ {
-		newkeys := getFreshData(1000, 32)
-		newvalues := getFreshData(1000, 32)
-		start := time.Now()
-		smt.Update(newkeys, newvalues)
-		end := time.Now()
-		smt.Commit()
-		end2 := time.Now()
-		for j, key := range newkeys {
-			val, _ := smt.Get(key)
-			if !bytes.Equal(val, newvalues[j]) {
-				b.Fatal("new key not included")
-			}
-		}
-		end3 := time.Now()
-		elapsed := end.Sub(start)
-		elapsed2 := end2.Sub(end)
-		elapsed3 := end3.Sub(end2)
-		var m runtime.MemStats
-		runtime.ReadMemStats(&m)
-		fmt.Println(i, " : update time : ", elapsed, "commit time : ", elapsed2,
-			"\n1000 Get time : ", elapsed3,
-			"\ndb read : ", smt.LoadDbCounter, "    cache read : ", smt.LoadCacheCounter,
-			"\ncache size : ", len(smt.db.liveCache),
-			"\nRAM : ", m.Sys/1024/1024, " MiB")
-	}
+        //b.ReportAllocs()
+        keys := getFreshData(1000, 32)
+        values := getFreshData(1000, 32)
+        smt.Update(keys, values)
+        fmt.Printf("\nLoading 1000000 x 1000 accounts b.N=%d", b.N)
+        for i := 0; i < 1000000; i++ {
+                newkeys := getFreshData(1000, 32)
+                newvalues := getFreshData(1000, 32)
+                start := time.Now()
+                smt.Update(newkeys, newvalues)
+                end := time.Now()
+                smt.Commit()
+                end2 := time.Now()
+                for j, key := range newkeys {
+                        val, _ := smt.Get(key)
+                        if !bytes.Equal(val, newvalues[j]) {
+                                b.Fatal("new key not included")
+                        }
+                }
+                end3 := time.Now()
+                elapsed := end.Sub(start)
+                elapsed2 := end2.Sub(end)
+                elapsed3 := end3.Sub(end2)
+                ap, _, _, _, _ := smt.MerkleProof(newkeys[99])
+                bitmap, compap, length, _, _, _, _ := smt.MerkleProofCompressed(newkeys[99])
+                fmt.Println(i, " : update time : ", elapsed, "commit time : ", elapsed2,
+                        "\n1000 Get time : ", elapsed3,
+                        "\ndb read : ", smt.LoadDbCounter, "    cache read : ", smt.LoadCacheCounter,
+                        "\ncache size : ", len(smt.db.liveCache),
+                        "\nProof size : ", len(ap)*32,
+                        "\nCompact Proof size : ", len(compap)*32,
+                        "\nCompact Proof length : ", length,
+                        "\nCompact Proof bitmap : ", bitmap,
+                        "\nRAM : ", m.Sys/1024/1024, " MiB")
+        }
 }
 
 //go test -run=xxx -bench=. -benchmem -test.benchtime=20s
