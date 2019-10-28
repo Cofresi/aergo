@@ -290,6 +290,62 @@ func TestTrieMerkleProofCompressed(t *testing.T) {
 	}
 }
 
+func TestTrieMerkleProof2(t *testing.T) {
+	smt := NewTrie(nil, common.Hasher, nil)
+	// Add data to empty trie
+	keys := getFreshData(10, 32)
+	values := getFreshData(10, 32)
+	smt.Update(keys, values)
+
+	for i, key := range keys {
+		ap, included, k, v, error := smt.MerkleProof(key)
+		fmt.Println(i, "inclusion:", ap, included, k, v, error)
+		if !smt.VerifyInclusion(ap, key, values[i]) {
+			t.Fatalf("failed to verify inclusion proof")
+		}
+		if !bytes.Equal(key, k) && !bytes.Equal(values[i], v) {
+			t.Fatalf("merkle proof didnt return the correct key-value pair")
+		}
+	}
+	emptyKey := common.Hasher([]byte("non-member"))
+	ap, included, proofKey, proofValue, error := smt.MerkleProof(emptyKey)
+	fmt.Println("non-inclusion:", ap, included, proofKey, proofValue, error)
+	if included {
+		t.Fatalf("failed to verify non inclusion proof")
+	}
+	if !smt.VerifyNonInclusion(ap, emptyKey, proofValue, proofKey) {
+		t.Fatalf("failed to verify non inclusion proof")
+	}
+}
+
+func TestTrieMerkleProofCompressed2(t *testing.T) {
+	smt := NewTrie(nil, common.Hasher, nil)
+	// Add data to empty trie
+	keys := getFreshData(10, 32)
+	values := getFreshData(10, 32)
+	smt.Update(keys, values)
+
+	for i, key := range keys {
+		bitmap, ap, length, included, k, v, error := smt.MerkleProofCompressed(key)
+		fmt.Println(i, "inclusion:", bitmap, ap, length, included, k, v, error)
+		if !smt.VerifyInclusionC(bitmap, key, values[i], ap, length) {
+			t.Fatalf("failed to verify inclusion proof")
+		}
+		if !bytes.Equal(key, k) && !bytes.Equal(values[i], v) {
+			t.Fatalf("merkle proof didnt return the correct key-value pair")
+		}
+	}
+	emptyKey := common.Hasher([]byte("non-member"))
+	bitmap, ap, length, included, proofKey, proofValue, error := smt.MerkleProofCompressed(emptyKey)
+	fmt.Println("non-inclusion:", bitmap, ap, length, included, proofKey, proofValue, error)
+	if included {
+		t.Fatalf("failed to verify non inclusion proof")
+	}
+	if !smt.VerifyNonInclusionC(ap, length, bitmap, emptyKey, proofKey, proofValue) {
+		t.Fatalf("failed to verify non inclusion proof")
+	}
+}
+
 func TestTrieCommit(t *testing.T) {
 	dbPath := path.Join(".aergo", "db")
 	if _, err := os.Stat(dbPath); os.IsNotExist(err) {
@@ -427,6 +483,108 @@ func TestTrieRevert(t *testing.T) {
 	}
 	st.Close()
 	os.RemoveAll(".aergo")
+}
+
+func TestTrieRevert2(t *testing.T) {
+	dbPath := path.Join(".aergo", "db")
+	if _, err := os.Stat(dbPath); os.IsNotExist(err) {
+		_ = os.MkdirAll(dbPath, 0711)
+	}
+	st := db.NewDB(db.LevelImpl, dbPath)
+
+	smt := NewTrie(nil, common.Hasher, st)
+
+	// Edge case : Test that revert doesnt delete shortcut nodes
+	// when moved to a different position in tree
+	key0 := make([]byte, 32, 32)
+	key1 := make([]byte, 32, 32)
+	// setting the bit at 251 creates 2 shortcut batches at height 252
+	bitSet(key1, 251)
+	values := getFreshData(2, 32)
+	keys := [][]byte{key0, key1}
+	root, _ := smt.Update([][]byte{key0}, [][]byte{values[0]})
+	smt.Commit()
+	root2, _ := smt.Update([][]byte{key1}, [][]byte{values[1]})
+	smt.Commit()
+	smt.Revert(root)
+	if len(smt.db.Store.Get(root)) == 0 {
+		t.Fatal("shortcut node shouldnt be deleted by revert")
+	}
+	if len(smt.db.Store.Get(root2)) != 0 {
+		t.Fatal("reverted root should have been deleted")
+	}
+	key1 = make([]byte, 32, 32)
+	// setting the bit at 255 stores the keys as the tip
+	bitSet(key1, 255)
+	smt.Update([][]byte{key1}, [][]byte{values[1]})
+	smt.Commit()
+	smt.Revert(root)
+	if len(smt.db.Store.Get(root)) == 0 {
+		t.Fatal("shortcut node shouldnt be deleted by revert")
+	}
+
+	// Test all nodes are reverted in the usual case
+	// Add data to empty trie
+	keys = getFreshData(10, 32)
+	values = getFreshData(10, 32)
+	root, _ = smt.Update(keys, values)
+	smt.Commit()
+
+	// Update the values
+	newValues := getFreshData(10, 32)
+	smt.Update(keys, newValues)
+	updatedNodes1 := smt.db.updatedNodes
+	smt.Commit()
+	newKeys := getFreshData(10, 32)
+	newValues = getFreshData(10, 32)
+	smt.Update(newKeys, newValues)
+	updatedNodes2 := smt.db.updatedNodes
+	smt.Commit()
+
+	smt.Revert(root)
+
+	if !bytes.Equal(smt.Root, root) {
+		t.Fatal("revert failed")
+	}
+	fmt.Println("pastTries1", smt.pastTries[0])
+	fmt.Println("pastTries2", smt.pastTries[1])
+	if len(smt.pastTries) != 2 { // contains empty trie + reverted trie
+		t.Fatal("past tries not updated after revert")
+	}
+	// Check all keys have been reverted
+	for i, key := range keys {
+		value, _ := smt.Get(key)
+		if !bytes.Equal(values[i], value) {
+			t.Fatal("revert failed, values not updated")
+		}
+	}
+	if len(smt.db.liveCache) != 0 {
+		t.Fatal("live cache not reset after revert")
+	}
+	// Check all reverted nodes have been deleted
+	for node, _ := range updatedNodes2 {
+		if len(smt.db.Store.Get(node[:])) != 0 {
+			t.Fatal("nodes not deleted from database", node)
+		}
+	}
+	for node, _ := range updatedNodes1 {
+		if len(smt.db.Store.Get(node[:])) != 0 {
+			t.Fatal("nodes not deleted from database", node)
+		}
+	}
+	st.Close()
+}
+
+func TestTrieGetPastTries(t *testing.T) {
+	dbPath := path.Join(".aergo", "db")
+	if _, err := os.Stat(dbPath); os.IsNotExist(err) {
+		_ = os.MkdirAll(dbPath, 0711)
+	}
+	st := db.NewDB(db.LevelImpl, dbPath)
+
+	smt := NewTrie(nil, common.Hasher, st)
+	fmt.Println("pastTries", smt.pastTries)
+	st.Close()
 }
 
 func TestTrieRaisesError(t *testing.T) {

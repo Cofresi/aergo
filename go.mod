@@ -3,6 +3,7 @@ module github.com/aergoio/aergo
 go 1.12
 
 require (
+	github.com/Cofresi/aergo-lib v0.0.0-20190920144059-fe158abb2891
 	github.com/Shopify/sarama v1.22.1 // indirect
 	github.com/Workiva/go-datastructures v1.0.50 // indirect
 	github.com/aergoio/aergo-actor v0.0.0-20190219030625-562037d5fec7
