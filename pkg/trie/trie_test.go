@@ -820,6 +820,8 @@ func benchmark10MAccounts10Ktps(smt *Trie, b *testing.B) {
                 elapsed3 := end3.Sub(end2)
                 ap, _, _, _, _ := smt.MerkleProof(newkeys[99])
                 bitmap, compap, length, _, _, _, _ := smt.MerkleProofCompressed(newkeys[99])
+                var m runtime.MemStats
+                runtime.ReadMemStats(&m)
                 fmt.Println(i, " : update time : ", elapsed, "commit time : ", elapsed2,
                         "\n1000 Get time : ", elapsed3,
                         "\ndb read : ", smt.LoadDbCounter, "    cache read : ", smt.LoadCacheCounter,
