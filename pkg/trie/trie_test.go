@@ -110,16 +110,16 @@ func TestTriePublicUpdateAndGet(t *testing.T) {
 	// Check all keys have been stored
 	for i, key := range keys {
 		value, _ := smt.Get(key)
-		fmt.Println(i, "key: ", key, "value: ", value)
-		//if !bytes.Equal(values[i], value) {
-		//	t.Fatal("trie not updated")
-		//}
+		if !bytes.Equal(values[i], value) {
+			t.Fatal("trie not updated")
+		}
 	}
 	if !bytes.Equal(root, smt.Root) {
 		t.Fatal("Root not stored")
 	}
 
-	newValues := getFreshData(20, 32)
+	newValues := getFreshValues(20, 130)
+	fmt.Println("newValues: ", newValues)
 	smt.Update(keys, newValues)
 
 	if len(smt.db.updatedNodes) != updatedNb {
