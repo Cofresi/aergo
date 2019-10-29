@@ -83,7 +83,7 @@ func (s *Trie) Get(key []byte) ([]byte, error) {
 	s.lock.RLock()
 	defer s.lock.RUnlock()
 	s.atomicUpdate = false
-	return s.get(s.Root, key, nil, 0, s.TrieHeight)
+	return s.getValue(s.Root, key, nil, 0, s.TrieHeight)
 }
 
 // get fetches the value of a key given a trie root
@@ -99,7 +99,7 @@ func (s *Trie) get(root, key []byte, batch [][]byte, iBatch, height int) ([]byte
 	}
 	if isShortcut {
 		if bytes.Equal(lnode[:HashLength], key) {
-			return rnode[:], nil
+			return rnode[:HashLength], nil
 		}
 		// also returns nil if height 0 is not a shortcut
 		return nil, nil
@@ -108,6 +108,30 @@ func (s *Trie) get(root, key []byte, batch [][]byte, iBatch, height int) ([]byte
 		return s.get(rnode, key, batch, 2*iBatch+2, height-1)
 	}
 	return s.get(lnode, key, batch, 2*iBatch+1, height-1)
+}
+
+// getValue fetches the value of a key given a trie root
+func (s *Trie) getValue(root, key []byte, batch [][]byte, iBatch, height int) ([]byte, error) {
+	if len(root) == 0 {
+		// the trie does not contain the key
+		return nil, nil
+	}
+	// Fetch the children of the node
+	batch, iBatch, lnode, rnode, isShortcut, err := s.loadChildren(root, height, iBatch, batch)
+	if err != nil {
+		return nil, err
+	}
+	if isShortcut {
+		if bytes.Equal(lnode[:HashLength], key) {
+			return rnode[:len(rnode)-1], nil
+		}
+		// also returns nil if height 0 is not a shortcut
+		return nil, nil
+	}
+	if bitIsSet(key, s.TrieHeight-height) {
+		return s.getValue(rnode, key, batch, 2*iBatch+2, height-1)
+	}
+	return s.getValue(lnode, key, batch, 2*iBatch+1, height-1)
 }
 
 // TrieRootExists returns true if the root exists in Database.
