@@ -83,6 +83,14 @@ func (s *Trie) Get(key []byte) ([]byte, error) {
 	s.lock.RLock()
 	defer s.lock.RUnlock()
 	s.atomicUpdate = false
+	return s.get(s.Root, key, nil, 0, s.TrieHeight)
+}
+
+// Get fetches the value of a key by going down the current trie root. Supports values > 32 bytes
+func (s *Trie) GetValue(key []byte) ([]byte, error) {
+	s.lock.RLock()
+	defer s.lock.RUnlock()
+	s.atomicUpdate = false
 	return s.getValue(s.Root, key, nil, 0, s.TrieHeight)
 }
 
