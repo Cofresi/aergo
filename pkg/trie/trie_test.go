@@ -109,7 +109,7 @@ func TestTriePublicUpdateAndGet(t *testing.T) {
 
 	// Check all keys have been stored
 	for i, key := range keys {
-		value, _ := smt.Get(key)
+		value, _ := smt.GetValue(key)
 		if !bytes.Equal(values[i], value) {
 			t.Fatal("trie not updated")
 		}
@@ -130,7 +130,7 @@ func TestTriePublicUpdateAndGet(t *testing.T) {
 	}
 	// Check all keys have been modified
 	for i, key := range keys {
-		value, _ := smt.Get(key)
+		value, _ := smt.GetValue(key)
 		if !bytes.Equal(newValues[i], value) {
 			t.Fatal("trie not updated")
 		}
