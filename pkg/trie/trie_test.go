@@ -110,6 +110,7 @@ func TestTriePublicUpdateAndGet(t *testing.T) {
 	// Check all keys have been stored
 	for i, key := range keys {
 		value, _ := smt.GetValue(key)
+		fmt.Println("value: ", value)
 		if !bytes.Equal(values[i], value) {
 			t.Fatal("trie not updated")
 		}
@@ -898,6 +899,5 @@ func getFreshValues(size, length int) [][]byte {
 		data = append(data, key)
 	}
 	sort.Sort(DataArray(data))
-	fmt.Println("data: ", data)
 	return data
 }
