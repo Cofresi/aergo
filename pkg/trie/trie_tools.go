@@ -86,7 +86,9 @@ func (s *Trie) Get(key []byte) ([]byte, error) {
 	return s.get(s.Root, key, nil, 0, s.TrieHeight)
 }
 
-// Get fetches the value of a key by going down the current trie root. Supports values > 32 bytes
+// GetValue is the same as Get(), but
+// Supports fetching values of arbitrary length
+// as opposed to Get() which always returns exactly 32 bytes
 func (s *Trie) GetValue(key []byte) ([]byte, error) {
 	s.lock.RLock()
 	defer s.lock.RUnlock()
